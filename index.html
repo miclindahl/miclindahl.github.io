@@ -13,13 +13,6 @@
 </head>
 
 <body class="bg-gray-100 text-gray-900">
-    <!-- Disclaimer -->
-    <div class="bg-yellow-200 border-l-4 border-yellow-500 text-yellow-900 px-4 py-3 mb-6">
-        <p class="text-sm font-semibold">Disclaimer</p>
-        <p class="text-sm">Dette er en prototype og lukket test kun for inviterede. Alle billeder er ejet af de respektive forhandlere. Jeg kan kontaktes på
-            miclindahl@gmail.com</p>
-    </div>
-
     <!-- Header -->
     <header class="bg-white shadow-md py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
@@ -39,7 +32,8 @@
             <div class="max-w-3xl">
                 <!-- Newsletter Signup -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold mb-4">🙋‍♂️ Tilmeld dig nyhedsbrevet for at få besked når siden bliver lanceret</h3>
+<p class="mt-1">ℹ️  Dette er en prototype og test kun for inviterede for at få feedback på konceptet. Alle billeder er ejet af de respektive forhandlere. Jeg kan kontaktes på miclindahl@gmail.com</p>
+                    <h3 class="text-lg font-semibold mb-4 mt-2">🙋‍♂️ Tilmeld dig nyhedsbrevet og følg med</h3>
                     <div class="flex gap-4">
                         <input type="email" placeholder="Din email"
                             class="flex-1 p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" disabled>
@@ -60,14 +54,14 @@
             <!-- Search Box -->
             <div class="mb-6">
                 <h2 class="text-xl font-bold mb-4">⌕ Søg efter dit næste ur her</h2>
-                <input v-model="searchQuery" type="text" placeholder="Prøv f.eks. submariner, chronograph, guld, reference nummer, årstal etc.."
+                <input v-model="searchQuery" type="text" placeholder="Submariner, chronograph, guld, ref, årstal,..."
                     class="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
             <!-- Filters Section -->
             <div class="border rounded-lg p-4 mb-4">
                 <div @click="toggleFilters" class="flex justify-between items-center cursor-pointer">
-                    <h3 class="text-lg font-semibold">Filtre</h3>
+                    <h3 class="text-lg font-semibold">Filtre <span v-if="activeFiltersCount > 0">({{ activeFiltersCount }})</span></h3>
                     <span class="text-blue-500 hover:text-blue-700">{{ showFilters ? 'Skjul' : 'Vis' }}</span>
                 </div>
 
@@ -28734,6 +28728,20 @@
                 },
                 displayedWatches() {
                     return this.filteredWatches.slice(0, this.watchesToShow);
+                },
+                activeFiltersCount() {
+                    let count = 0;
+                    if (this.searchQuery) count++;
+                    if (this.selectedBrand) count++;
+                    if (this.selectedShop) count++;
+                    if (this.selectedCategory) count++;
+                    if (this.selectedDiameter) count++;
+                    if (this.selectedStrap) count++;
+                    if (this.selectedCaseMaterial) count++;
+                    if (this.selectedGender) count++;
+                    if (this.minPrice) count++;
+                    if (this.maxPrice) count++;
+                    return count;
                 },
             },
         }).mount('#app');
